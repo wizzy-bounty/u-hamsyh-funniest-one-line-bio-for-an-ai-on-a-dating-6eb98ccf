@@ -13,7 +13,13 @@ BIO = (
 )
 
 
+def validate_bio(bio: str, max_chars: int = 180) -> None:
+    assert "\n" not in bio and "\r" not in bio, "bio must be a single line"
+    assert len(bio) <= max_chars, f"bio exceeds {max_chars} characters"
+
+
 def main() -> None:
+    validate_bio(BIO)
     out_dir = "/output"
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
